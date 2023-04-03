@@ -25,12 +25,13 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:dateparam", function (req, res) {
-  let newDate = req.params.dateparam;
-  res.json({
-    query: req,
+  let newDate = {
+    query: req.query,
     params: req.params,
-    dateparam: newDate
-  })
+    dateparam: req.params.dateparam
+  }
+  
+  res.json(newDate)
 });
 
 // app.get('/api/2015-12-25', function(req, res) {

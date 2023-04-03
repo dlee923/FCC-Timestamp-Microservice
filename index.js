@@ -27,8 +27,8 @@ app.get("/api/hello", function (req, res) {
 app.get('/api/2015-12-25', function(req, res) {
   let newDate = new Date(2015, 12, 25)
   res.json({
-    unix: newDate.getTime,
-    utc: newDate
+    unix: newDate.getTime(),
+    utc: new Intl.DateTimeFormat('en-US').format(newDate)
   });
 }); 
 

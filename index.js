@@ -33,7 +33,7 @@ app.get('/api/2015-12-25', function(req, res) {
 
 app.get('/api/1451001600000', function(req, res) {
   let newDate = new Date(1451001600000);
-  let options = {dateStyle: 'short', timeStyle: 'long', timeZone: 'UTC'};
+  let options = {dateStyle: 'medium', timeZone: 'GMT'};
   let utc = new Intl.DateTimeFormat('en-US', options).format(newDate);
 
   res.json({

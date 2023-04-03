@@ -25,16 +25,17 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get('/api/2015-12-25', function(req, res) {
+  let newDate = new Date(2015, 12, 25)
   res.json({
-    unix: '',
-    utc: ''
+    unix: newDate.getTime,
+    utc: newDate
   });
 }); 
 
 app.get('/api/1451001600000', function(req, res) {
-  let newDate = new Date(1451001600000);
+  let unix = new Date(1451001600000);
   let options = {dateStyle: 'long', timestyle: 'long', timeZone: 'GMT'};
-  let utc = new Intl.DateTimeFormat('en-GB', options).format(newDate);
+  let utc = new Intl.DateTimeFormat('en-GB', options).format(unix);
 
   res.json({
     unix: 1451001600000,

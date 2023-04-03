@@ -31,6 +31,14 @@ app.get('/api/2015-12-25', function(req, res) {
   });
 }); 
 
+app.get('/api/1451001600000', function(req, res) {
+  let dateObject = new Date(1451001600000);
+  res.json({
+    unix: dateObject,
+    utc: ''
+  });
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);

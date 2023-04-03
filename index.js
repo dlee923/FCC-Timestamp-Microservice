@@ -24,6 +24,13 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api", function (req, res) {
+  res.json({
+    body: req.body,
+    query: req.query
+  })
+});
+
 app.get('/api/2015-12-25', function(req, res) {
   let newDate = new Date(2015, 11, 25);
   let unix = newDate.getTime();
@@ -37,8 +44,11 @@ app.get('/api/2015-12-25', function(req, res) {
 
 app.get('/api/1451001600000', function(req, res) {
   let unix = new Date(1451001600000);
-  let utc = unix.toGMTString();
 
+  if (unix.date) {};
+
+  let utc = unix.toGMTString();
+  
   res.json({
     unix: 1451001600000,
     utc: utc

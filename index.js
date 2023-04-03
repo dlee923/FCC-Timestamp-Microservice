@@ -24,36 +24,38 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date", function (req, res) {
+app.get("/api/:dateparam", function (req, res) {
+  let newDate = newDate(req.params.dateparam);
   res.json({
     query: req,
-    params: req.params
+    params: req.params,
+    dateparam: newDate
   })
 });
 
-app.get('/api/2015-12-25', function(req, res) {
-  let newDate = new Date(2015, 11, 25);
-  let unix = newDate.getTime();
-  let utc = newDate.toGMTString();
+// app.get('/api/2015-12-25', function(req, res) {
+//   let newDate = new Date(2015, 11, 25);
+//   let unix = newDate.getTime();
+//   let utc = newDate.toGMTString();
 
-  res.json({
-    unix: unix,
-    utc: utc
-  });
-}); 
+//   res.json({
+//     unix: unix,
+//     utc: utc
+//   });
+// }); 
 
-app.get('/api/1451001600000', function(req, res) {
-  let unix = new Date(1451001600000);
+// app.get('/api/1451001600000', function(req, res) {
+//   let unix = new Date(1451001600000);
 
-  if (unix.date) {};
+//   if (unix.date) {};
 
-  let utc = unix.toGMTString();
+//   let utc = unix.toGMTString();
   
-  res.json({
-    unix: 1451001600000,
-    utc: utc
-  });
-});
+//   res.json({
+//     unix: 1451001600000,
+//     utc: utc
+//   });
+// });
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

@@ -25,13 +25,16 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:dateparam", function (req, res) {
-  let newDate = {
-    query: req.query,
-    params: req.params,
-    dateparam: req.params.dateparam
+  let newDate = new Date(req.params.dateparam);
+  let unix = newDate.getTime();
+  let utc = newDate.toGMTString();
+
+  let timestamp = {
+    unix: unix,
+    utc: utc
   }
-  
-  res.json(newDate)
+
+  res.json(timestamp)
 });
 
 // app.get('/api/2015-12-25', function(req, res) {

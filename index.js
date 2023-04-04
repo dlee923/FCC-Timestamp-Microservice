@@ -29,12 +29,21 @@ app.get("/api/:dateparam", function (req, res) {
   let unix = newDate.getTime();
   let utc = newDate.toGMTString();
 
-  let timestamp = {
-    unix: unix,
-    utc: utc
+  if (Object.prototype.toString.call(newDate) === '[object Date]') {
+    if (isNaN(unix)) {
+      // do nothing as date is invalid
+      console.log(req.params.dateparam);
+    } else {
+      // create json object
+      let timestamp = {
+        unix: unix,
+        utc: utc,
+        newDate: newDate,
+        dateparam: req.params.dateparam
+      }    
+      res.json(timestamp);
+    }
   }
-
-  res.json(timestamp)
 });
 
 // app.get('/api/2015-12-25', function(req, res) {

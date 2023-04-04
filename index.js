@@ -25,7 +25,17 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:dateparam", function (req, res) {
-  let newDate = new Date(req.params.dateparam);
+  let dateparam = req.params.dateparam;
+  var newDate = new Date();
+
+  let unixParam = Number(dateparam);
+
+  if (isNaN(unixParam)) {
+    newDate = new Date(unixParam);
+  } else {
+    newDate = new Date(dateparam);
+  }
+
   let unix = newDate.getTime();
   let utc = newDate.toGMTString();
 
@@ -43,6 +53,8 @@ app.get("/api/:dateparam", function (req, res) {
       }    
       res.json(timestamp);
     }
+  } else {
+    // do nothing, date is invalid
   }
 });
 

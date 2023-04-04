@@ -24,9 +24,23 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api", function(req, res) {
+  var newDate = new Date(Date.now());
+  
+  let unix = newDate.getTime();
+  let utc = newDate.toGMTString();
+
+  let timestamp = {
+    unix: unix,
+    utc: utc,
+  }    
+  res.json(timestamp);
+});
+
+// express routing : using route parameters
 app.get("/api/:dateparam", function (req, res) {
   let dateparam = req.params.dateparam;
-  var newDate = Date(Date.now());
+  var newDate = new Date();
 
   let unixParam = Number(dateparam);
 

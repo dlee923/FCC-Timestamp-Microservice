@@ -26,16 +26,18 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:dateparam", function (req, res) {
   let dateparam = req.params.dateparam;
-  var newDate = new Date();
+  var newDate = Date(Date.now());
 
   let unixParam = Number(dateparam);
 
-  if (isNaN(unixParam)) {
-    newDate = new Date(dateparam);
-    console.log('date api endpoint')
-  } else {
-    newDate = new Date(unixParam);
-    console.log('unix api endpoint')    
+  if (dateparam !== '') {
+    if (isNaN(unixParam)) {
+      newDate = new Date(dateparam);
+      console.log('date api endpoint')
+    } else {
+      newDate = new Date(unixParam);
+      console.log('unix api endpoint')    
+    }
   }
 
   let unix = newDate.getTime();
@@ -44,7 +46,7 @@ app.get("/api/:dateparam", function (req, res) {
   if (Object.prototype.toString.call(newDate) === '[object Date]') {
     if (isNaN(unix)) {
       // do nothing as date is invalid
-      res.json({error: 'Date is invalid!'});
+      res.json({error: 'Invalid Date'});
     } else {
       // create json object and send response
       let timestamp = {
@@ -55,7 +57,7 @@ app.get("/api/:dateparam", function (req, res) {
     }
   } else {
     // do nothing, date is invalid
-    res.json({error: 'Date is invalid!'});
+    res.json({error: 'Invalid Date'});
   }
 });
 

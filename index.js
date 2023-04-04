@@ -41,56 +41,28 @@ app.get("/api/:dateparam", function (req, res) {
   let unix = newDate.getTime();
   let utc = newDate.toGMTString();
 
-  // if (Object.prototype.toString.call(newDate) === '[object Date]') {
-  //   if (isNaN(unix)) {
-  //     // do nothing as date is invalid
-  //     console.log(req.params.dateparam);
-  //   } else {
-  //     // create json object
-  //     let timestamp = {
-  //       unix: unix,
-  //       utc: utc,
-  //       newDate: newDate,
-  //       dateparam: req.params.dateparam
-  //     }    
-  //     res.json(timestamp);
-  //   }
-  // } else {
-  //   // do nothing, date is invalid
-  // }
+  if (Object.prototype.toString.call(newDate) === '[object Date]') {
+    if (isNaN(unix)) {
+      // do nothing as date is invalid
+      console.log(req.params.dateparam);
+    } else {
+      // create json object and send response
+      let timestamp = {
+        unix: unix,
+        utc: utc,
+      }    
+      res.json(timestamp);
+    }
+  } else {
+    // do nothing, date is invalid
+  }
 
-  let timestamp = {
-    unix: unix,
-    utc: utc,
-    newDate: newDate,
-    dateparam: req.params.dateparam
-  }    
-  res.json(timestamp);
+  // let timestamp = {
+  //   unix: unix,
+  //   utc: utc,
+  // }    
+  // res.json(timestamp);
 });
-
-// app.get('/api/2015-12-25', function(req, res) {
-//   let newDate = new Date(2015, 11, 25);
-//   let unix = newDate.getTime();
-//   let utc = newDate.toGMTString();
-
-//   res.json({
-//     unix: unix,
-//     utc: utc
-//   });
-// }); 
-
-// app.get('/api/1451001600000', function(req, res) {
-//   let unix = new Date(1451001600000);
-
-//   if (unix.date) {};
-
-//   let utc = unix.toGMTString();
-  
-//   res.json({
-//     unix: 1451001600000,
-//     utc: utc
-//   });
-// });
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {

@@ -44,7 +44,7 @@ app.get("/api/:dateparam", function (req, res) {
   if (Object.prototype.toString.call(newDate) === '[object Date]') {
     if (isNaN(unix)) {
       // do nothing as date is invalid
-      alert('Date parameter is invalid!');
+      res.json({error: 'Date is invalid!'});
     } else {
       // create json object and send response
       let timestamp = {
@@ -55,7 +55,7 @@ app.get("/api/:dateparam", function (req, res) {
     }
   } else {
     // do nothing, date is invalid
-    alert('Date parameter is invalid!');
+    res.json({error: 'Date is invalid!'});
   }
 });
 

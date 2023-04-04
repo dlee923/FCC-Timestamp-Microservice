@@ -32,8 +32,10 @@ app.get("/api/:dateparam", function (req, res) {
 
   if (isNaN(unixParam)) {
     newDate = new Date(unixParam);
+    console.log('unix api endpoint')
   } else {
     newDate = new Date(dateparam);
+    console.log('date api endpoint')
   }
 
   let unix = newDate.getTime();
